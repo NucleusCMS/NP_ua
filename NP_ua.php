@@ -2,56 +2,46 @@
 class NP_ua extends NucleusPlugin { 
 	function getName() { return 'NP_ua'; }
 	function getMinNucleusVersion() { return 330; }
-	function getAuthor()  { return 'yama.kyms'; }
-	function getVersion() { return '0.1.1'; }
+	function getAuthor()  { return 'yama'; }
+	function getVersion() { return '0.2'; }
 	function getURL() {return 'http://japan.nucleuscms.org/wiki/plugins:ua';}
 	function getDescription() { return '<%if(ua,ie7)%>, <%if(ua,mac)%>...'; } 
 	function supportsFeature($what) { return ($what=='SqlTablePrefix')?1:0; }
 
 	function doIf($key='', $value='')
 	{
-		$ua = getenv( "HTTP_USER_AGENT" );
+		$ua = getenv('HTTP_USER_AGENT');
 		switch($key)
 		{
-			case 'ie':
-				$result = strstr($ua, 'MSIE')      ? true : false;
-				break;
 			case 'ie8':
-				$result = strstr($ua, 'MSIE 8')    ? true : false;
-				break;
+				return strstr($ua, 'MSIE 8')    ? true : false;
 			case 'ie7':
-				$result = strstr($ua, 'MSIE 7')    ? true : false;
-				break;
+				return strstr($ua, 'MSIE 7')    ? true : false;
 			case 'ie6':
-				$result = (strstr($ua, 'MSIE 6') and !strstr($ua, 'MSIE 7'))    ? true : false;
-				break;
-			case 'fx':
-			case 'ff':
-				$result = strstr($ua, 'Firefox')   ? true : false;
-				break;
+				return (strstr($ua, 'MSIE 6') && !strstr($ua, 'MSIE 7'))    ? true : false;
+			case 'ie':
+				return strstr($ua, 'MSIE')      ? true : false;
 			case 'fx3':
 			case 'ff3':
-				$result = strstr($ua, 'Firefox/3') ? true : false;
-				break;
+				return strstr($ua, 'Firefox/3') ? true : false;
 			case 'fx2':
 			case 'ff2':
-				$result = strstr($ua, 'Firefox/2') ? true : false;
-				break;
+				return strstr($ua, 'Firefox/2') ? true : false;
+			case 'fx':
+			case 'ff':
+				return strstr($ua, 'Firefox')   ? true : false;
 			case 'chrome':
-				$result = strstr($ua, 'Chrome') ? true : false;
-				break;
+				return strstr($ua, 'Chrome') ? true : false;
 			case 'baidu':
-				$result = strstr($ua, 'Baidu') ? true : false;
-				break;
+				return strstr($ua, 'Baidu') ? true : false;
 			default:
-				$result = strstr($ua, $param) ? true : false;
+				return strstr($ua, $key) ? true : false;
 		}
-		return $result;
 	}
+	
 	function doSkinVar($p='')
 	{
-		$ua = getenv( "HTTP_USER_AGENT" );
+		$ua = getenv('HTTP_USER_AGENT');
 		echo $ua;
 	}
 }
-?>
