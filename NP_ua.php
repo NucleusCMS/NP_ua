@@ -8,10 +8,10 @@ class NP_ua extends NucleusPlugin {
 	function getDescription() { return '<%if(ua,ie7)%>, <%if(ua,mac)%>...'; } 
 	function supportsFeature($what) { return ($what=='SqlTablePrefix')?1:0; }
 
-	function doIf($param)
+	function doIf($key='', $value='')
 	{
 		$ua = getenv( "HTTP_USER_AGENT" );
-		switch($param)
+		switch($key)
 		{
 			case 'ie':
 				$result = strstr($ua, 'MSIE')      ? true : false;
@@ -48,7 +48,7 @@ class NP_ua extends NucleusPlugin {
 		}
 		return $result;
 	}
-	function doSkinVar()
+	function doSkinVar($p='')
 	{
 		$ua = getenv( "HTTP_USER_AGENT" );
 		echo $ua;
